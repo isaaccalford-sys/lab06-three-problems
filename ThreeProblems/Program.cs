@@ -18,6 +18,8 @@
 
 //The Menu
 int choice = 0;
+Random rng = new Random(4000);
+
 
 // do while, so that it can run once and then run until chioce is 5 and not just end.
 do 
@@ -32,7 +34,7 @@ System.Console.WriteLine("3. The Score Report");
 System.Console.WriteLine("4. All three");
 System.Console.WriteLine("5. Quit");
 System.Console.Write("Choose a number 1-5: ");
-choice = Convert.ToInt32(Console.Read());
+choice = Convert.ToInt32(Console.ReadLine());
 
 System.Console.WriteLine();
 
@@ -89,16 +91,73 @@ if (choice == 1 || choice == 4)
     else if (grade < 60)
         {
             System.Console.WriteLine($"{grade} earns an F.");
-        }      
-    
+        }       
  }
 
 
-
+//dice table
 if (choice == 2 || choice == 4)
     {
-    System.Console.WriteLine(2);
-    }
+    System.Console.WriteLine("=== Exercise 2: The Dice Table ===");
+
+    int rollCounter = 0;
+    int winCounter = 0;
+    char reRollcheck;
+    string modifier = "";
+
+// do while, so that the dice can continue iterating until the user presses n 
+ do
+    {
+
+    rollCounter++;
+
+    int firstDie = rng.Next(1,7);
+    int secoundDie = rng.Next(1,7);
+    int dieTotal = firstDie + secoundDie;
+
+// if so it will only run once and else ifs so that they will only run if previous statments do not.
+    if ( firstDie == 1 && secoundDie == 1)
+        {
+            modifier = " Snake eyes.";
+        }
+
+    else if ( firstDie == secoundDie )
+        {
+            modifier = " Doubles!";
+        }
+
+    else if (firstDie + secoundDie == 7 || firstDie + secoundDie == 11)
+        {
+            winCounter++;
+            modifier = " A winner.";
+        }
+// else to catch all other possible outcomes 
+    else
+            {
+                modifier = "";
+            }
+    
+
+    System.Console.WriteLine($"Roll {rollCounter}: {firstDie} and {secoundDie}, total {dieTotal}.{modifier}");
+
+
+    System.Console.Write("Roll again? (y/n): ");
+    reRollcheck = Convert.ToChar(Console.ReadLine().ToUpper().Trim());
+
+
+        //check for correct input needs to be while to allow for reapeted incorrect input
+        while (reRollcheck != 'Y' && reRollcheck != 'N')
+            {
+                System.Console.WriteLine("Invalid Input press (y/n)");
+                reRollcheck = Convert.ToChar(Console.ReadLine().ToUpper().Trim());
+            }
+
+
+    } while (reRollcheck != 'N');
+
+System.Console.WriteLine($"You rolled {rollCounter} and won {winCounter}.");
+   }
+
 if (choice == 3 || choice == 4)
     {
     System.Console.WriteLine(3);
