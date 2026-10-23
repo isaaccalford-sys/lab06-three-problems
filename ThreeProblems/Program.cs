@@ -156,6 +156,7 @@ do
         int highestScore = 0;
         int passCounter = 0;
         
+        //for loop, to be able to loop until every spot in score is filled 
         for (int i = 0; i < scoreList.Length; i++)
 
             {
@@ -163,7 +164,7 @@ do
                 System.Console.Write($"score {i + 1}: ");
                 scoreList[i] = Convert.ToInt32(Console.ReadLine());
             }
-
+        //foreach to run the full loop for every score 
         foreach (int score in scoreList)
             {
                 scoreTotal += score;
